@@ -15,7 +15,7 @@ class WeatherProvider with ChangeNotifier {
   Future<void> fetchWeather(String cityName) async {
     final apiKey = '4205fb03d57029b9dc2d01788945f172';
     final url =
-        'https://api.openweathermap.org/data/2.5/weather?q=$cityName&appid=$apiKey&units=metric';
+        'https://api.openweathermap.org/data/2.5/weather?q=$cityName&appid=$apiKey&units=metric&lang=pl';
 
     try {
       final response = await http.get(Uri.parse(url));
@@ -41,7 +41,7 @@ class WeatherProvider with ChangeNotifier {
   Future<void> fetchForecast(String cityName) async {
     final apiKey = '4205fb03d57029b9dc2d01788945f172';
     final url =
-        'https://api.openweathermap.org/data/2.5/forecast?q=$cityName&appid=$apiKey&units=metric';
+        'https://api.openweathermap.org/data/2.5/forecast?q=$cityName&appid=$apiKey&units=metric&lang=pl';
 
     try {
       final response = await http.get(Uri.parse(url));

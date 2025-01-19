@@ -8,7 +8,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({super.key}); // Uproszczony konstruktor z super.parameters
 
   @override
   Widget build(BuildContext context) {
@@ -18,17 +18,33 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Weather App',
+        title: 'WeatherWise',
         theme: ThemeData(
           primarySwatch: Colors.blue,
-          scaffoldBackgroundColor: Colors.grey[200],
-          textTheme: const TextTheme(
-            bodyLarge: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            bodyMedium: TextStyle(fontSize: 16),
+          scaffoldBackgroundColor: Colors.grey[100],
+          textTheme: TextTheme(
+            bodyLarge: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+            bodyMedium: TextStyle(
+              fontSize: 16,
+              color: Colors.grey[800],
+            ),
           ),
           appBarTheme: const AppBarTheme(
             elevation: 0,
             centerTitle: true,
+            backgroundColor: Colors.blueAccent,
+            foregroundColor: Colors.white,
+          ),
+          cardTheme: CardTheme(
+            color: Colors.white,
+            elevation: 3,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
           ),
         ),
         home: const CityListScreen(),

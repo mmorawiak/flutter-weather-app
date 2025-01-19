@@ -15,6 +15,7 @@ class CityDetailsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(cityName),
+        backgroundColor: Colors.blueAccent, // Kolor AppBar
       ),
       body: FutureBuilder(
         future: Future.wait([
@@ -29,11 +30,9 @@ class CityDetailsScreen extends StatelessWidget {
             return const Center(child: Text('Nie udało się pobrać danych.'));
           }
 
-          // Pobranie obecnych danych pogodowych
           final weather = weatherProvider.currentWeather!;
           final forecast = weatherProvider.forecast;
 
-          // Grupowanie prognozy według dni
           final groupedForecast = weatherProvider.groupForecastByDate(forecast);
           final dailySummary = weatherProvider.getDailySummary(groupedForecast);
 
@@ -46,6 +45,7 @@ class CityDetailsScreen extends StatelessWidget {
                   // Obecna pogoda
                   Card(
                     elevation: 4,
+                    color: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
@@ -89,7 +89,7 @@ class CityDetailsScreen extends StatelessWidget {
                                 style: const TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.blue,
+                                  color: Colors.blueAccent,
                                 ),
                               ),
                             ],
@@ -171,6 +171,10 @@ class CityDetailsScreen extends StatelessWidget {
                         child: Card(
                           elevation: 2,
                           margin: const EdgeInsets.symmetric(vertical: 8),
+                          color: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                           child: ListTile(
                             leading: Image.network(
                               'http://openweathermap.org/img/wn/${daySummary['icon']}@2x.png',
@@ -179,7 +183,8 @@ class CityDetailsScreen extends StatelessWidget {
                             ),
                             title: Text(
                               daySummary['date'], // Data
-                              style: const TextStyle(fontSize: 18),
+                              style: const TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                             subtitle: Text(daySummary['condition']), // Warunki
                             trailing: Text(
@@ -187,6 +192,7 @@ class CityDetailsScreen extends StatelessWidget {
                               style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
+                                color: Colors.blueAccent,
                               ),
                             ),
                           ),

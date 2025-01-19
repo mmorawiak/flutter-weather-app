@@ -15,7 +15,7 @@ class CityListState extends State<CityListScreen> {
   @override
   void initState() {
     super.initState();
-    filteredCities = cities; // Domyślnie pokazuj wszystkie miasta
+    filteredCities = cities; // Domyślnie pokaż wszystkie miasta
   }
 
   void _filterCities(String query) {
@@ -30,7 +30,7 @@ class CityListState extends State<CityListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Lista Miast'),
+        title: const Text('WeatherWise - Lista Miast'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -54,6 +54,7 @@ class CityListState extends State<CityListScreen> {
                 itemCount: filteredCities.length,
                 itemBuilder: (ctx, index) {
                   return Card(
+                    color: Colors.white,
                     elevation: 2,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -61,14 +62,18 @@ class CityListState extends State<CityListScreen> {
                     child: ListTile(
                       title: Text(
                         filteredCities[index],
-                        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       trailing: const Icon(Icons.chevron_right),
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (ctx) =>
-                                CityDetailsScreen(cityName: filteredCities[index]),
+                            builder: (ctx) => CityDetailsScreen(
+                              cityName: filteredCities[index],
+                            ),
                           ),
                         );
                       },
