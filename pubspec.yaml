@@ -13,6 +13,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   provider: any
   http: any
+  flutter_map: ^5.0.0
+  latlong2: ^0.9.1
 
 dev_dependencies:
   flutter_test:

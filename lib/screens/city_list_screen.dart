@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'city_details_screen.dart';
+import 'city_map_screen.dart';
 
 class CityListScreen extends StatefulWidget {
   const CityListScreen({super.key});
@@ -31,6 +32,16 @@ class CityListState extends State<CityListScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('WeatherWise - Lista Miast'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.map),
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (ctx) => CityMapScreen()),
+              );
+            },
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
