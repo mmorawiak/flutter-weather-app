@@ -35,8 +35,24 @@ class CityDetailsScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    FadeInImage.assetNetwork(
+                      placeholder: 'assets/loading.gif',
+                      image:
+                      'http://openweathermap.org/img/wn/${weather.icon}@2x.png',
+                      width: 100,
+                      height: 100,
+                      fit: BoxFit.contain,
+                      imageErrorBuilder: (context, error, stackTrace) {
+                        return const Icon(
+                          Icons.cloud_off,
+                          size: 100,
+                          color: Colors.grey,
+                        );
+                      },
+                    ),
+                    const SizedBox(height: 16),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

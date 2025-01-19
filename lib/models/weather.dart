@@ -4,6 +4,7 @@ class Weather {
   final double windSpeed;
   final int windDirection;
   final int cloudiness;
+  final String icon; // Dodane pole
 
   Weather({
     required this.condition,
@@ -11,6 +12,7 @@ class Weather {
     required this.windSpeed,
     required this.windDirection,
     required this.cloudiness,
+    required this.icon, // Dodane pole
   });
 
   factory Weather.fromJson(Map<String, dynamic> json) {
@@ -21,6 +23,7 @@ class Weather {
         windSpeed: (json['wind']['speed'] as num).toDouble(),
         windDirection: json['wind']['deg'] as int,
         cloudiness: json['clouds']['all'] as int,
+        icon: json['weather'][0]['icon'] as String, // Pobieramy kod ikony z API
       );
     } catch (e) {
       throw Exception('Błąd parsowania danych pogodowych: $e');
