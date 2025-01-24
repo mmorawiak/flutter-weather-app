@@ -16,7 +16,7 @@ class CityListState extends State<CityListScreen> {
   @override
   void initState() {
     super.initState();
-    filteredCities = cities; // Domyślnie pokaż wszystkie miasta
+    filteredCities = cities;
   }
 
   void _filterCities(String query) {

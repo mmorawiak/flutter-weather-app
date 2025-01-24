@@ -68,13 +68,12 @@ class WeatherProvider with ChangeNotifier {
     }
   }
 
-  // Grupowanie prognozy według dni
   Map<String, List<DailyForecast>> groupForecastByDate(
       List<DailyForecast> forecast) {
     Map<String, List<DailyForecast>> groupedData = {};
 
     for (var item in forecast) {
-      final date = item.date.split(' ')[0]; // Wyciągnij tylko datę
+      final date = item.date.split(' ')[0];
       if (groupedData[date] == null) {
         groupedData[date] = [];
       }
@@ -84,7 +83,6 @@ class WeatherProvider with ChangeNotifier {
     return groupedData;
   }
 
-  // Tworzenie podsumowań dla każdego dnia
   List<Map<String, dynamic>> getDailySummary(
       Map<String, List<DailyForecast>> groupedForecast) {
     List<Map<String, dynamic>> dailySummary = [];
@@ -96,12 +94,10 @@ class WeatherProvider with ChangeNotifier {
       for (var forecast in forecasts) {
         totalTemp += forecast.temperature;
 
-        // Zliczanie warunków pogodowych
         conditionCount[forecast.condition] =
             (conditionCount[forecast.condition] ?? 0) + 1;
       }
 
-      // Dominujące warunki
       String dominantCondition = conditionCount.entries
           .reduce((a, b) => a.value > b.value ? a : b)
           .key;
@@ -110,7 +106,7 @@ class WeatherProvider with ChangeNotifier {
         'date': date,
         'averageTemp': (totalTemp / forecasts.length).toStringAsFixed(0),
         'condition': dominantCondition,
-        'icon': forecasts.first.icon, // Używamy pierwszej ikony jako reprezentatywnej
+        'icon': forecasts.first.icon,
       });
     });
 

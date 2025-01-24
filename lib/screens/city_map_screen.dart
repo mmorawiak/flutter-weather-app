@@ -4,7 +4,7 @@ import 'package:latlong2/latlong.dart';
 import 'city_details_screen.dart';
 
 class CityMapScreen extends StatefulWidget {
-  const CityMapScreen({super.key}); // Dodano `key`
+  const CityMapScreen({super.key});
 
   @override
   CityMapScreenState createState() => CityMapScreenState();
@@ -28,7 +28,7 @@ class CityMapScreenState extends State<CityMapScreen> {
       ),
       body: FlutterMap(
         options: MapOptions(
-          center: LatLng(51.10418, 17.00643), // Centrum mapy
+          center: LatLng(51.10418, 17.00643),
           zoom: 6.0,
         ),
         children: [

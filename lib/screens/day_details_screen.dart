@@ -11,7 +11,6 @@ class DayDetailsScreen extends StatelessWidget {
     required this.details,
   });
 
-  // Mapa tłumaczeń warunków pogodowych na język polski
   String translateCondition(String condition) {
     final Map<String, String> translations = {
       'clear sky': 'Bezchmurnie',
@@ -34,7 +33,7 @@ class DayDetailsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Szczegóły prognozy: $date'),
-        backgroundColor: Colors.blueAccent, // Kolor AppBar
+        backgroundColor: Colors.blueAccent,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -45,7 +44,7 @@ class DayDetailsScreen extends StatelessWidget {
             return Card(
               elevation: 4,
               margin: const EdgeInsets.symmetric(vertical: 8),
-              color: Colors.white, // Kolor tła dla kart prognozy
+              color: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
@@ -63,7 +62,7 @@ class DayDetailsScreen extends StatelessWidget {
                   },
                 ),
                 title: Text(
-                  '${forecast.date.split(' ')[1]}:00', // Wyświetla godzinę (np. 15:00)
+                  '${forecast.date.split(' ')[1]}:00',
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -71,14 +70,14 @@ class DayDetailsScreen extends StatelessWidget {
                   ),
                 ),
                 subtitle: Text(
-                  translateCondition(forecast.condition), // Przetłumaczone warunki pogodowe
+                  translateCondition(forecast.condition),
                   style: const TextStyle(
                     fontStyle: FontStyle.italic,
                     color: Colors.black87,
                   ),
                 ),
                 trailing: Text(
-                  '${forecast.temperature.toStringAsFixed(0)}°C', // Temperatura zaokrąglona
+                  '${forecast.temperature.toStringAsFixed(0)}°C',
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

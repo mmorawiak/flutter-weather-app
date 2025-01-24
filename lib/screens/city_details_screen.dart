@@ -15,7 +15,7 @@ class CityDetailsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(cityName),
-        backgroundColor: Colors.blueAccent, // Kolor AppBar
+        backgroundColor: Colors.blueAccent,
       ),
       body: FutureBuilder(
         future: Future.wait([
@@ -42,7 +42,6 @@ class CityDetailsScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Obecna pogoda
                   Card(
                     elevation: 4,
                     color: Colors.white,
@@ -145,7 +144,6 @@ class CityDetailsScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
 
-                  // Prognoza na kilka dni
                   const Text(
                     'Prognoza na najbliższe dni:',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
