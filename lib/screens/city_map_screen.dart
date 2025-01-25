@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import 'city_details_screen.dart';
+import 'package:provider/provider.dart';
+import '../providers/weather_provider.dart';
 
 class CityMapScreen extends StatefulWidget {
   const CityMapScreen({super.key});
@@ -11,7 +12,7 @@ class CityMapScreen extends StatefulWidget {
 }
 
 class CityMapScreenState extends State<CityMapScreen> {
-  final Map<String, LatLng> cityCoordinates = {
+  final Map<String, LatLng> predefinedCityCoordinates = {
     'Warszawa': LatLng(52.2297, 21.0122),
     'Kraków': LatLng(50.0647, 19.9450),
     'Gdańsk': LatLng(54.3521, 18.6464),
@@ -21,6 +22,9 @@ class CityMapScreenState extends State<CityMapScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final weatherProvider = Provider.of<WeatherProvider>(context);
+    final favoriteCities = weatherProvider.favoriteCities;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Mapa miast'),
@@ -37,30 +41,47 @@ class CityMapScreenState extends State<CityMapScreen> {
             subdomains: ['a', 'b', 'c'],
           ),
           MarkerLayer(
-            markers: cityCoordinates.entries.map((entry) {
-              return Marker(
-                point: entry.value,
-                builder: (ctx) => GestureDetector(
-                  onTap: () {
-                    // Bezpieczna nawigacja
-                    if (mounted) {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (ctx) => CityDetailsScreen(
-                            cityName: entry.key,
-                          ),
-                        ),
+            markers: [
+              ...predefinedCityCoordinates.entries.map((entry) {
+                return Marker(
+                  point: entry.value,
+                  builder: (ctx) => GestureDetector(
+                    onTap: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Miasto: ${entry.key}')),
                       );
-                    }
-                  },
-                  child: const Icon(
-                    Icons.location_on,
-                    color: Colors.red,
-                    size: 30,
+                    },
+                    child: const Icon(
+                      Icons.location_on,
+                      color: Colors.red,
+                      size: 30,
+                    ),
                   ),
-                ),
-              );
-            }).toList(),
+                );
+              }),
+              ...favoriteCities.map((city) {
+                try {
+                  final coordinates = weatherProvider.getCoordinatesForCity(city);
+                  return Marker(
+                    point: coordinates,
+                    builder: (ctx) => GestureDetector(
+                      onTap: () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Ulubione miasto: $city')),
+                        );
+                      },
+                      child: const Icon(
+                        Icons.star,
+                        color: Colors.yellow,
+                        size: 30,
+                      ),
+                    ),
+                  );
+                } catch (e) {
+                  return null;
+                }
+              }).whereType<Marker>(),
+            ],
           ),
         ],
       ),
